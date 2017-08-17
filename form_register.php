@@ -30,48 +30,20 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
-?>
-<?php
-// *** Validate request to login to this site.
-if (!isset($_SESSION)) {
-  session_start();
+
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
-$loginFormAction = $_SERVER['PHP_SELF'];
-if (isset($_GET['accesscheck'])) {
-  $_SESSION['PrevUrl'] = $_GET['accesscheck'];
-}
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+  $insertSQL = sprintf("INSERT INTO user_id (username, password, name) VALUES (%s, %s, %s)",
+                       GetSQLValueString($_POST['username'], "text"),
+                       GetSQLValueString($_POST['password'], "text"),
+                       GetSQLValueString($_POST['name'], "text"));
 
-if (isset($_POST['username'])) {
-  $loginUsername=$_POST['username'];
-  $password=$_POST['password'];
-  $MM_fldUserAuthorization = "";
-  $MM_redirectLoginSuccess = "home.php";
-  $MM_redirectLoginFailed = "form_login.php";
-  $MM_redirecttoReferrer = false;
   mysql_select_db($database_condb, $condb);
-  
-  $LoginRS__query=sprintf("SELECT username, password FROM user_id WHERE username=%s AND password=%s",
-    GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
-   
-  $LoginRS = mysql_query($LoginRS__query, $condb) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
-  if ($loginFoundUser) {
-     $loginStrGroup = "";
-    
-	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
-    //declare two session variables and assign them
-    $_SESSION['MM_Username'] = $loginUsername;
-    $_SESSION['MM_UserGroup'] = $loginStrGroup;	      
-
-    if (isset($_SESSION['PrevUrl']) && false) {
-      $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
-    }
-    header("Location: " . $MM_redirectLoginSuccess );
-  }
-  else {
-    header("Location: ". $MM_redirectLoginFailed );
-  }
+  $Result1 = mysql_query($insertSQL, $condb) or die(mysql_error());
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -84,12 +56,22 @@ if (isset($_POST['username'])) {
 </head>
 
 <body>
-<div id="header"><h1>เข้าสู่ระบบ</h1></div>
+<div id="header">
+  <h1>สมัคสมาชิก</h1></div>
 <div id="form">
-	<form id="form1" name="form1" method="POST" action="<?php echo $loginFormAction; ?>">
-		<input class="input" name="username" type="text" id="username6" size="20"  required="required" placeholder="ชื่อผู้ใช้"/><br>
-		<input class="input" name="password" type="password" id="password" size="20" required="required" placeholder="รหัสผ่าน"/><br>
-		<input class="btn" type="submit" name="login" id="login" value="เข้าสู่ระบบ" />
+	<form action="<?php echo $editFormAction; ?>" id="form1" name="form1" method="POST">
+	  <p>
+		  <input class="input" name="username" type="text" id="username6" size="20"  required="required" placeholder="ชื่อผู้ใช้"/>
+		  <br>
+		  <input class="input" name="password" type="password" id="password" size="20" required="required" placeholder="รหัสผ่าน"/>
+	  </p>
+	  <p>&nbsp;</p>
+	  <p>
+	    <input class="input" name="name" type="text" id="username" size="20"  required="required" placeholder="ชื่อเล่น"/>
+	    <br>
+	    <input class="btn" type="submit" name="login" id="login" value="สมัคสมาชิก" />
+      </p>
+	  <input type="hidden" name="MM_insert" value="form1" />
 	</form>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

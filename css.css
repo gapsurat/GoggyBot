@@ -1,0 +1,40 @@
+body {
+	background-color: #f0f0f0;
+}
+#form2 table tr td {
+	font-size: larger;
+	font-family: fantasy;
+}
+#header{
+	text-align:center;
+	margin:5em 20%;
+	color:#f5aa00
+}
+#form{
+	margin:2em 20%;
+}
+.btn{
+	color:#fff !important;
+	border-color:#fff;
+	display:block;
+	margin:1em;
+	width:100%;
+	background-color:#f5aa00;
+	margin:auto;
+	padding:0.5em 1em ;
+}
+.btn:hover{
+	color:#f5aa00 !important;
+	background:#fff;
+}
+.input{
+	border:solid 1px;
+	background-color:#fff;
+	border-color:#fff;
+	display:block;
+	margin:1em;
+	width:100%;
+	color:#f5aa00;
+	margin:auto;
+	padding:0.5em 1em ;
+}
