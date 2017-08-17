@@ -68,6 +68,8 @@ if (isset($_POST['username'])) {
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
     }
     header("Location: " . $MM_redirectLoginSuccess );
+	$_SESSION['ses_userid'] = session_id();
+	$_SESSION['ses_username'] = $loginUsername;
   }
   else {
     header("Location: ". $MM_redirectLoginFailed );
