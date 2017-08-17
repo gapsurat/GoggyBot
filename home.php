@@ -57,7 +57,7 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
   <table width="700" height="91" border="0" align="center">
     <tr>
       <td align="center"><label for="say"></label>
-        <textarea name="say2" cols="115" rows="20" id="say">
+        <textarea name="say2" cols="115" rows="20" readonly="readonly" id="say">
         </textarea></td>
     </tr>
   </table>
