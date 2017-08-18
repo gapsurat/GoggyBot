@@ -17,9 +17,9 @@
 	<h1 style="font-size:5em;">GoggyBot</h1>
 </div>
 <div id="form">
-	<form id="form1" name="form1" method="post" action="">
-	  <a class="btn" href="./form_login.php">เข้าสู่ระบบ</a><br />
-	  <a class="btn" href="./form_register.php">สมัครสมาชิก</a>
+	<form id="form1" name="form1" method="post" action="" class="card">
+	  <a style="width: initial;" class="btn" href="./form_login.php">เข้าสู่ระบบ</a><br />
+	  <a style="width: initial;" class="btn" href="./form_register.php">สมัครสมาชิก</a>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 	</form>
 <div>

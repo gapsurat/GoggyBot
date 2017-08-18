@@ -90,6 +90,7 @@ session_start();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Unbenanntes Dokument</title>
+<link href="./css.css" rel="stylesheet">
 <script type="text/javascript">
 function MM_goToURL() { //v3.0
   var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
@@ -99,55 +100,28 @@ function MM_goToURL() { //v3.0
 </head>
 
 <body>
-<form id="form3" name="form3" method="post" action="">
-  <p>&nbsp;</p>
-  <table width="100%" border="0">
-    <tr>
-      <td width="1%">&nbsp;</td>
-      <td width="7%" align="right">Point: </td>
-      <td width="25%"><?php echo $row_Recordset1['point']; ?></td>
-      <td width="27%" align="left"><?php echo $row_Recordset1['name']; ?></td>
-      <td width="13%" align="center"><input name="play" type="button" id="play" onclick="MM_goToURL('parent','home.php');return document.MM_returnValue" value="แชทบอท" /></td>
-      <td width="13%" align="center"><input name="score" type="button" id="score" onclick="MM_goToURL('parent','leaderboard.php');return document.MM_returnValue" value="กระดานคะแนน" /></td>
-      <td width="14%" align="center"><input name="teach" type="button" id="teach" onclick="MM_goToURL('parent','teach.php');return document.MM_returnValue" value="สอนบอท" /></td>
-    </tr>
-  </table>
-  <p>&nbsp;</p>
-</form>
-<p>&nbsp;</p>
+<?php include('./nav.php'); ?>
+<div style="padding:150px 0;">
+
 <form id="form2" name="form2" method="post" action="">
-  <table border="1" align="center">
+  <table class="card" align="center">
+	<tr><td colspan="2"><h2>กระดานคะแนน</h2></td></tr>
     <tr>
-      <td>name</td>
-      <td>viewer</td>
+      <td style="text-align:center;">ชื่อ</td>
+      <td style="text-align:center;">จำนวนผู้เข้าชม</td>
     </tr>
     <?php do { ?>
     <tr>
-      <td><?php echo $row_Recordset2['name']; ?></td>
-      <td><?php echo $row_Recordset2['viewer']; ?></td>
+      <td ><?php echo $row_Recordset2['name']; ?></td>
+      <td style="text-align:center;"><?php echo $row_Recordset2['viewer']; ?></td>
     </tr>
     <?php } while ($row_Recordset2 = mysql_fetch_assoc($Recordset2)); ?>
   </table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
 </form>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+</div>
 </body>
 </html>
 <?php
 mysql_free_result($Recordset1);
-
-mysql_free_result($Recordset2);
-
-mysql_free_result($Recordset1);
-
 mysql_free_result($Recordset2);
 ?>

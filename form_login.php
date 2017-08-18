@@ -87,10 +87,13 @@ if (isset($_POST['username'])) {
 
 <body>
 <div id="header"><h1>เข้าสู่ระบบ</h1></div>
-<div id="form">
+<div id="form" class="card">
 	<form id="form1" name="form1" method="POST" action="<?php echo $loginFormAction; ?>">
-		<input class="input" name="username" type="text" id="username6" size="20"  required="required" placeholder="ชื่อผู้ใช้"/><br>
-		<input class="input" name="password" type="password" id="password" size="20" required="required" placeholder="รหัสผ่าน"/><br>
+		<p style="margin-left:2rem;">ชื่อผู้ใช้</p>
+		<input class="input" name="username" type="text" id="username6" size="20"  required="required" placeholder="ชื่อผู้ใช้"/>
+		<p style="margin-left:2rem;">รหัสผ่าน</p>
+		<input class="input" name="password" type="password" id="password" size="20" required="required" placeholder="รหัสผ่าน"/>
+		<br /><br />
 		<input class="btn" type="submit" name="login" id="login" value="เข้าสู่ระบบ" />
 	</form>
 </div>

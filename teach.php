@@ -67,6 +67,7 @@ session_start();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Unbenanntes Dokument</title>
+<link href="./css.css" rel="stylesheet">
 <script type="text/javascript">
 function MM_goToURL() { //v3.0
   var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
@@ -76,57 +77,20 @@ function MM_goToURL() { //v3.0
 </head>
 
 <body>
-<form id="form3" name="form3" method="post" action="">
-  <p>&nbsp;</p>
-  <table width="100%" border="0">
-    <tr>
-      <td width="1%">&nbsp;</td>
-      <td width="7%" align="right">คะแนน:</td>
-      <td width="25%"><?php echo $row_Recordset1['point']; ?></td>
-      <td width="27%" align="left"><?php echo $row_Recordset1['name']; ?></td>
-      <td width="13%" align="center"><input name="play" type="button" id="play" onclick="MM_goToURL('parent','home.php');return document.MM_returnValue" value="แชทบอท" /></td>
-      <td width="13%" align="center"><input name="score" type="button" id="score" onclick="MM_goToURL('parent','leaderboard.php');return document.MM_returnValue" value="กระดานคะแนน" /></td>
-      <td width="14%" align="center"><input name="teach" type="button" id="teach" onclick="MM_goToURL('parent','teach.php');return document.MM_returnValue" value="สอนบอท" /></td>
-    </tr>
-  </table>
-  <p>&nbsp;</p>
-</form>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<form id="form2" name="form2" method="POST" action="<?php echo $editFormAction; ?>">
-  <table width="834" border="0" align="center">
-    <tr>
-      <td width="97">&nbsp;</td>
-      <td width="727">&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right">คำถาม</td>
-      <td><label for="botask"></label>
-      <input name="botask" type="text" id="botask" size="100" /></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right">คำตอบ</td>
-      <td><input name="botans" type="text" id="botans" size="100" /></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="right">&nbsp;</td>
-      <td><input type="submit" name="submit" id="submit" value="สอนบอท" /></td>
-    </tr>
-  </table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
+<?php include('./nav.php'); ?>
+<div style="padding:150px 0;">
+<form id="form2" name="form2" class="card" method="POST" action="<?php echo $editFormAction; ?>">
+	<h2>สอนบอท</h2>
+	<p align="center">คำถาม</p>
+    <input class="input" name="botask" type="text" id="botask" />
+	<p align="center">คำตอบ</p>
+    <input class="input" name="botans" type="text" id="botans" />
+	<center>
+    <input style="margin-top:30px;" class="btn" type="submit" name="submit" id="submit" value="สอนบอท" />
+	</center>
   <input type="hidden" name="MM_insert" value="form2" />
 </form>
+</div>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 </body>

@@ -66,19 +66,16 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <body>
 <div id="header">
   <h1>สมัครสมาชิก</h1></div>
-<div id="form">
+<div id="form" class="card">
 	<form action="<?php echo $editFormAction; ?>" id="form1" name="form1" method="POST">
-	  <p>
-		  <input class="input" name="username" type="text" id="username6" size="20"  required="required" placeholder="ชื่อผู้ใช้"/>
-		  <br>
-		  <input class="input" name="password" type="password" id="password" size="20" required="required" placeholder="รหัสผ่าน"/>
-	  </p>
-	  <p>&nbsp;</p>
-	  <p>
+		<p style="margin-left:2rem;">ชื่อผู้ใช้</p>
+		<input class="input" name="username" type="text" id="username6" size="20"  required="required" placeholder="ชื่อผู้ใช้"/>
+		<p style="margin-left:2rem;">รหัสผ่าน</p>
+		<input class="input" name="password" type="password" id="password" size="20" required="required" placeholder="รหัสผ่าน"/>
+		<p style="margin-left:2rem;">ชื่อเล่น</p>
 	    <input class="input" name="name" type="text" id="username" size="20"  required="required" placeholder="ชื่อเล่น"/>
 	    <br>
 	    <input class="btn" type="submit" name="login" id="login" value="สมัครสมาชิก" />
-      </p>
 	  <input type="hidden" name="MM_insert" value="form1" />
 	</form>
 </div>
