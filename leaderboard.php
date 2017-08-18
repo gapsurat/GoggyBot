@@ -1,3 +1,6 @@
+<?php require_once('Connections/condb.php'); ?>
+<?php require_once('Connections/condb.php'); ?>
+<?php require_once('Connections/condb.php'); ?>
 <?php require_once('Connections/condb.php');
 session_start() ?>
 <?php
@@ -32,15 +35,51 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$maxRows_Recordset1 = 10;
+$pageNum_Recordset1 = 0;
+if (isset($_GET['pageNum_Recordset1'])) {
+  $pageNum_Recordset1 = $_GET['pageNum_Recordset1'];
+}
+$startRow_Recordset1 = $pageNum_Recordset1 * $maxRows_Recordset1;
+
 $colname_Recordset1 = "-1";
 if (isset($_SESSION['ses_username'])) {
   $colname_Recordset1 = $_SESSION['ses_username'];
 }
 mysql_select_db($database_condb, $condb);
 $query_Recordset1 = sprintf("SELECT * FROM user_id WHERE username = %s", GetSQLValueString($colname_Recordset1, "text"));
-$Recordset1 = mysql_query($query_Recordset1, $condb) or die(mysql_error());
+$query_limit_Recordset1 = sprintf("%s LIMIT %d, %d", $query_Recordset1, $startRow_Recordset1, $maxRows_Recordset1);
+$Recordset1 = mysql_query($query_limit_Recordset1, $condb) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
-$totalRows_Recordset1 = mysql_num_rows($Recordset1);
+
+if (isset($_GET['totalRows_Recordset1'])) {
+  $totalRows_Recordset1 = $_GET['totalRows_Recordset1'];
+} else {
+  $all_Recordset1 = mysql_query($query_Recordset1);
+  $totalRows_Recordset1 = mysql_num_rows($all_Recordset1);
+}
+$totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
+
+$maxRows_Recordset2 = 10;
+$pageNum_Recordset2 = 0;
+if (isset($_GET['pageNum_Recordset2'])) {
+  $pageNum_Recordset2 = $_GET['pageNum_Recordset2'];
+}
+$startRow_Recordset2 = $pageNum_Recordset2 * $maxRows_Recordset2;
+
+mysql_select_db($database_condb, $condb);
+$query_Recordset2 = "SELECT name, viewer FROM user_id ORDER BY viewer ASC";
+$query_limit_Recordset2 = sprintf("%s LIMIT %d, %d", $query_Recordset2, $startRow_Recordset2, $maxRows_Recordset2);
+$Recordset2 = mysql_query($query_limit_Recordset2, $condb) or die(mysql_error());
+$row_Recordset2 = mysql_fetch_assoc($Recordset2);
+
+if (isset($_GET['totalRows_Recordset2'])) {
+  $totalRows_Recordset2 = $_GET['totalRows_Recordset2'];
+} else {
+  $all_Recordset2 = mysql_query($query_Recordset2);
+  $totalRows_Recordset2 = mysql_num_rows($all_Recordset2);
+}
+$totalPages_Recordset2 = ceil($totalRows_Recordset2/$maxRows_Recordset2)-1;
 
 session_start();
 ?>
@@ -77,31 +116,38 @@ function MM_goToURL() { //v3.0
 </form>
 <p>&nbsp;</p>
 <form id="form2" name="form2" method="post" action="">
-  <table width="700" height="91" border="0" align="center">
+  <table border="1" align="center">
     <tr>
-      <td align="center"><label for="say"></label>
-        <textarea name="say2" cols="115" rows="20" id="say">
-        </textarea></td>
+      <td>name</td>
+      <td>viewer</td>
     </tr>
+    <?php do { ?>
+    <tr>
+      <td><?php echo $row_Recordset2['name']; ?></td>
+      <td><?php echo $row_Recordset2['viewer']; ?></td>
+    </tr>
+    <?php } while ($row_Recordset2 = mysql_fetch_assoc($Recordset2)); ?>
   </table>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
   <p>&nbsp;</p>
 </form>
 <p>&nbsp;</p>
-<form id="form1" name="form1" method="post" action="">
-  &nbsp;
-  &nbsp; 
-  &nbsp; 
-   <table width="1074" border="0" align="center">
-    <tr>
-      <td width="950" height="30" align="right"><label for="say"></label>
-      <input name="say" type="text" id="say" size="119" /></td>
-      <td width="114"><input type="submit" name="submit" id="submit" value="ส่งข้อความ" /></td>
-    </tr>
-  </table>
-</form>
 <p>&nbsp;</p>
 </body>
 </html>
 <?php
 mysql_free_result($Recordset1);
+
+mysql_free_result($Recordset2);
+
+mysql_free_result($Recordset1);
+
+mysql_free_result($Recordset2);
 ?>

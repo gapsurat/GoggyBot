@@ -34,17 +34,24 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
-  echo "<script>alert(สมัครสมาชิกสำเร็จ);</script>";
+
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+	
   $insertSQL = sprintf("INSERT INTO user_id (username, password, name) VALUES (%s, %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"),
                        GetSQLValueString($_POST['name'], "text"));
 
   mysql_select_db($database_condb, $condb);
-  $Result1 = mysql_query($insertSQL, $condb) or die(mysql_error());
+ if( $Result1 = mysql_query($insertSQL, $condb)){
+	 echo "<script>alert('สมัครสมาชิกสำเร็จ');</script>";
+	 header("location:index.php");
+ }else{
+	 echo "<script>alert('สมัครสมาชิกล้มเหลว');</script>";
+	 header("location:index.php");
+ }
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

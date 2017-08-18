@@ -1,3 +1,5 @@
+<?php require_once('Connections/condb.php'); ?>
+<?php require_once('Connections/condb.php'); ?>
 <?php require_once('Connections/condb.php');
 session_start() ?>
 <?php
@@ -30,6 +32,20 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   }
   return $theValue;
 }
+}
+
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
+  $insertSQL = sprintf("INSERT INTO botprogram (botask, botans) VALUES (%s, %s)",
+                       GetSQLValueString($_POST['botask'], "text"),
+                       GetSQLValueString($_POST['botans'], "text"));
+
+  mysql_select_db($database_condb, $condb);
+  $Result1 = mysql_query($insertSQL, $condb) or die(mysql_error());
 }
 
 $colname_Recordset1 = "-1";
@@ -65,7 +81,7 @@ function MM_goToURL() { //v3.0
   <table width="100%" border="0">
     <tr>
       <td width="1%">&nbsp;</td>
-      <td width="7%" align="right">Point: </td>
+      <td width="7%" align="right">คะแนน:</td>
       <td width="25%"><?php echo $row_Recordset1['point']; ?></td>
       <td width="27%" align="left"><?php echo $row_Recordset1['name']; ?></td>
       <td width="13%" align="center"><input name="play" type="button" id="play" onclick="MM_goToURL('parent','home.php');return document.MM_returnValue" value="แชทบอท" /></td>
@@ -76,29 +92,42 @@ function MM_goToURL() { //v3.0
   <p>&nbsp;</p>
 </form>
 <p>&nbsp;</p>
-<form id="form2" name="form2" method="post" action="">
-  <table width="700" height="91" border="0" align="center">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<form id="form2" name="form2" method="POST" action="<?php echo $editFormAction; ?>">
+  <table width="834" border="0" align="center">
     <tr>
-      <td align="center"><label for="say"></label>
-        <textarea name="say2" cols="115" rows="20" id="say">
-        </textarea></td>
+      <td width="97">&nbsp;</td>
+      <td width="727">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">คำถาม</td>
+      <td><label for="botask"></label>
+      <input name="botask" type="text" id="botask" size="100" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">คำตอบ</td>
+      <td><input name="botans" type="text" id="botans" size="100" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">&nbsp;</td>
+      <td><input type="submit" name="submit" id="submit" value="สอนบอท" /></td>
     </tr>
   </table>
   <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <input type="hidden" name="MM_insert" value="form2" />
 </form>
 <p>&nbsp;</p>
-<form id="form1" name="form1" method="post" action="">
-  &nbsp;
-  &nbsp; 
-  &nbsp; 
-   <table width="1074" border="0" align="center">
-    <tr>
-      <td width="950" height="30" align="right"><label for="say"></label>
-      <input name="say" type="text" id="say" size="119" /></td>
-      <td width="114"><input type="submit" name="submit" id="submit" value="ส่งข้อความ" /></td>
-    </tr>
-  </table>
-</form>
 <p>&nbsp;</p>
 </body>
 </html>

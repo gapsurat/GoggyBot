@@ -5,6 +5,7 @@
 $hostname_condb = "localhost";
 $database_condb = "goggybot";
 $username_condb = "root";
-$password_condb = "mysql";
+$password_condb = "056241119";
 $condb = mysql_pconnect($hostname_condb, $username_condb, $password_condb) or trigger_error(mysql_error(),E_USER_ERROR); 
+mysql_query("SET NAMES UTF8",$condb);
 ?>
