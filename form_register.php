@@ -34,6 +34,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+  echo "<script>alert(สมัครสมาชิกสำเร็จ);</script>";
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
@@ -57,7 +58,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 
 <body>
 <div id="header">
-  <h1>สมัคสมาชิก</h1></div>
+  <h1>สมัครสมาชิก</h1></div>
 <div id="form">
 	<form action="<?php echo $editFormAction; ?>" id="form1" name="form1" method="POST">
 	  <p>
@@ -69,7 +70,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 	  <p>
 	    <input class="input" name="name" type="text" id="username" size="20"  required="required" placeholder="ชื่อเล่น"/>
 	    <br>
-	    <input class="btn" type="submit" name="login" id="login" value="สมัคสมาชิก" />
+	    <input class="btn" type="submit" name="login" id="login" value="สมัครสมาชิก" />
       </p>
 	  <input type="hidden" name="MM_insert" value="form1" />
 	</form>

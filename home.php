@@ -1,46 +1,5 @@
-<?php require_once('Connections/condb.php'); ?>
 <?php
 session_start();
-if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
-{
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-  }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
-  switch ($theType) {
-    case "text":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
-    case "long":
-    case "int":
-      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-      break;
-    case "double":
-      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-      break;
-    case "date":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;
-    case "defined":
-      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-      break;
-  }
-  return $theValue;
-}
-}
-
-$colname_Recordset1 = "-1";
-if (isset($_SESSION['ses_username'])) {
-  $colname_Recordset1 = $_SESSION['ses_username'];
-}
-mysql_select_db($database_condb, $condb);
-$query_Recordset1 = sprintf("SELECT * FROM user_id WHERE username = %s", GetSQLValueString($colname_Recordset1, "text"));
-$Recordset1 = mysql_query($query_Recordset1, $condb) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
-$totalRows_Recordset1 = mysql_num_rows($Recordset1);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -52,6 +11,18 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 </head>
 
 <body>
+<form id="form3" name="form3" method="post" action="">
+  <p>&nbsp;</p>
+  <table width="100%" border="0">
+    <tr>
+      <td width="59%">&nbsp;</td>
+      <td width="13%" align="right">Point: </td>
+      <td width="14%">&nbsp;</td>
+      <td width="14%" align="right">&nbsp;</td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+</form>
 <p>&nbsp;</p>
 <form id="form2" name="form2" method="post" action="">
   <table width="700" height="91" border="0" align="center">
@@ -79,7 +50,3 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 <p>&nbsp;</p>
 </body>
 </html>
-<?php
-mysql_free_result($Recordset1);
-
-?>
