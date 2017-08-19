@@ -68,7 +68,7 @@ if (isset($_GET['pageNum_Recordset2'])) {
 $startRow_Recordset2 = $pageNum_Recordset2 * $maxRows_Recordset2;
 
 mysql_select_db($database_condb, $condb);
-$query_Recordset2 = "SELECT name, viewer FROM user_id ORDER BY viewer ASC";
+$query_Recordset2 = "SELECT name, viewer FROM user_id ORDER BY viewer DESC";
 $query_limit_Recordset2 = sprintf("%s LIMIT %d, %d", $query_Recordset2, $startRow_Recordset2, $maxRows_Recordset2);
 $Recordset2 = mysql_query($query_limit_Recordset2, $condb) or die(mysql_error());
 $row_Recordset2 = mysql_fetch_assoc($Recordset2);
