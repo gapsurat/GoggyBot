@@ -44,7 +44,7 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 <link rel="stylesheet" href="./css.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>firstpage</title>
+<title>หน้าแรก</title>
 </head>
 
 <body>
