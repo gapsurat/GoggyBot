@@ -60,7 +60,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link rel="stylesheet" href="css.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>form_login</title>
+<title>สมัครสมาชิก</title>
 </head>
 
 <body>
