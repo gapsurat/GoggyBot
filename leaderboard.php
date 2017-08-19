@@ -108,7 +108,7 @@ function MM_goToURL() { //v3.0
 	<tr><td colspan="2"><h2>กระดานคะแนน</h2></td></tr>
     <tr>
       <td style="text-align:center;">ชื่อ</td>
-      <td style="text-align:center;">จำนวนผู้เข้าชม</td>
+      <td style="text-align:center;">จำนวนการสอน</td>
     </tr>
     <?php do { ?>
     <tr>

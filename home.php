@@ -1,8 +1,4 @@
-<?php require_once('Connections/condb.php'); ?>
-<?php require_once('Connections/condb.php'); ?>
-<?php require_once('Connections/condb.php'); ?>
-<?php require_once('Connections/condb.php'); ?>
-<?php require_once('Connections/condb.php'); ?>
+
 <?php require_once('Connections/condb.php'); ?>
 <?php require_once('Connections/condb.php');
 session_start() ?>
@@ -10,7 +6,7 @@ session_start() ?>
 <?php
 
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -21,7 +17,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -41,7 +37,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -52,7 +48,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -72,7 +68,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -83,7 +79,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -103,7 +99,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -114,7 +110,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -168,19 +164,37 @@ if (isset($_GET['totalRows_Recordset2'])) {
 }
 $totalPages_Recordset2 = ceil($totalRows_Recordset2/$maxRows_Recordset2)-1;
 
-mysql_select_db($database_condb, $condb);
-$query_Recordset3 = "SELECT * FROM gogchat";
-$Recordset3 = mysql_query($query_Recordset3, $condb) or die(mysql_error());
-$row_Recordset3 = mysql_fetch_assoc($Recordset3);
-$totalRows_Recordset3 = mysql_num_rows($Recordset3);
+$maxRows_Recordset3 = 10;
+$pageNum_Recordset3 = 0;
+if (isset($_GET['pageNum_Recordset3'])) {
+  $pageNum_Recordset3 = $_GET['pageNum_Recordset3'];
+}
+$startRow_Recordset3 = $pageNum_Recordset3 * $maxRows_Recordset3;
 
 mysql_select_db($database_condb, $condb);
-if($row_Recordset2[botans] == NULL){
+$query_Recordset3 = "SELECT * FROM gogchat";
+$query_limit_Recordset3 = sprintf("%s LIMIT %d, %d", $query_Recordset3, $startRow_Recordset3, $maxRows_Recordset3);
+$Recordset3 = mysql_query($query_limit_Recordset3, $condb) or die(mysql_error());
+$row_Recordset3 = mysql_fetch_assoc($Recordset3);
+
+if (isset($_GET['totalRows_Recordset3'])) {
+  $totalRows_Recordset3 = $_GET['totalRows_Recordset3'];
+} else {
+  $all_Recordset3 = mysql_query($query_Recordset3);
+  $totalRows_Recordset3 = mysql_num_rows($all_Recordset3);
+}
+$totalPages_Recordset3 = ceil($totalRows_Recordset3/$maxRows_Recordset3)-1;
+
+mysql_select_db($database_condb, $condb);
+if($row_Recordset2[botans]== ""){
 	$row_Recordset2[botans]="ไม่เข้าใจคำถาม";
 	$id = $_SESSION['ses_username'];
-	mysql_query("update user_id set point = point+1 where username = '$id'"); 
+	mysql_query("update user_id set point = point+1 where username = '$id'");
+	mysql_query("INSERT INTO botprogram (botask, botans) VALUES ('$_POST[botans]','$row_Recordset2[botans]')");
+	header("Refresh: $sec; url=$page");
 }
-$query = mysql_query("insert into gogchat (mechat, botchat) values ('$_POST[botans]', '$row_Recordset2[botans]')");
+$bname = $_SESSION['ses_username'];
+$query = mysql_query("insert into gogchat (bname, mechat, botchat) values ('$bname', '$_POST[botans]', '$row_Recordset2[botans]')");
 $query_Recordset3 = "SELECT * FROM gogchat";
 $Recordset3 = mysql_query($query_Recordset3, $condb) or die(mysql_error());
 $row_Recordset3 = mysql_fetch_assoc($Recordset3);
@@ -195,48 +209,70 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Unbenanntes Dokument</title>
 <link href="./css.css" rel="stylesheet">
+<style>
+  #chatbox{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 250px;
+    width: 100%;
+  }
+</style>
 <script type="text/javascript">
 function MM_goToURL() { //v3.0
   var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
   for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
 }
+function ScrollDown(){
+  var el = document.getElementById('chatbox');
+  el.tabIndex = 32456;
+  el.focus();
+}
+function AAAAA() {
+  var textarea = document.getElementById('chatbox') ;
+  textarea.scrollTop = textarea.scrollHeight;
+}
 </script>
 </head>
-<body>
+<body onload="AAAAA();">
 <?php include('./nav.php'); ?>
-<p>&nbsp;</p>
-<form id="botans" name="botans" method="post" action="">
-  &nbsp;
-  &nbsp; 
-  &nbsp; 
-   <table width="800" border="0" align="center">
-    <tr>
-      <td width="712" height="30" align="left"><label for="botans"></label>
-      <input name="botans" type="text" id="botans" size="100" /></td>
-      <td width="352"><input type="submit" name="submit" id="submit" class="btn" value="ส่งข้อความ" /></td>
+
+<div style="padding-top:100px;">
+  <div class="card">
+    <table width="100%" border="0" align="center">
+    <tr >
+    <td width="20%">ผู้ส่ง</td>
+    <td width="40%">คำถาม</td>
+    <td width="40%">คำตอบ</td>
     </tr>
-  </table>
-</form>
-<p>&nbsp;</p>
-<table border="0">
-  <tr>
-    <td>mechat</td>
-    <td>botchat</td>
-  </tr>
-  <?php do { ?>
-    <tr>
-      <td><?php echo $row_Recordset3['mechat']; ?></td>
-      <td><?php echo $row_Recordset3['botchat']; ?></td>
-    </tr>
-    <?php } while ($row_Recordset3 = mysql_fetch_assoc($Recordset3)); ?>
-</table>
+    </table>
+    <div  id="chatbox">
+      <table width="100%" border="0" align="center" >
+      <?php do { ?>
+        <tr>
+          <td width="20%"><?php echo $row_Recordset3['bname']; ?></td>
+          <td width="40%"><?php echo $row_Recordset3['mechat']; ?></td>
+          <td width="40%"><?php echo $row_Recordset3['botchat']; ?></td>
+        </tr>
+      <?php } while ($row_Recordset3 = mysql_fetch_assoc($Recordset3)); ?>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:2em !important;height: 60px;">
+    <form id="botans" name="botans" method="post" action="" style="">
+        <input class="input" name="botans" type="text" id="botans" style="height:50px;float:left;width:70%;" /><br />
+        <input type="submit" name="submit" id="submit" class="btn" value="ส่งข้อความ" style="float:right;width:20%;margin:0 !important;" />
+    </form>
+  </div>
+</div>
 </body>
 </html>
 <?php
-mysql_free_result($Recordset3);
-
 mysql_free_result($Recordset1);
 
 mysql_free_result($Recordset2);
+
+mysql_free_result($Recordset3);
 
 ?>

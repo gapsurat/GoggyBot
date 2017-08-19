@@ -38,14 +38,18 @@ $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
-  $insertSQL = sprintf("INSERT INTO botprogram (botask, botans) VALUES (%s, %s)",
+ 	 $insertSQL = sprintf("INSERT INTO botprogram (botask, botans) VALUES (%s, %s)",
                        GetSQLValueString($_POST['botask'], "text"),
-                       GetSQLValueString($_POST['botans'], "text"));
-
+                       GetSQLValueString($_POST['botans'], "text"));	
   mysql_select_db($database_condb, $condb);
-  $Result1 = mysql_query($insertSQL, $condb) or die(mysql_error());
+  if($Result1 = mysql_query($insertSQL, $condb) ){
+	   echo "<script>alert('สอนบอทสำเร็จ');</script>";
+	   mysql_query("update user_id set point = point-3 where username = '$id'");
+ }else{
+	 echo "<script>alert('สอนบอทล้มเหลว');</script>";
+ }
+  
 }
 
 $colname_Recordset1 = "-1";
@@ -57,6 +61,16 @@ $query_Recordset1 = sprintf("SELECT * FROM user_id WHERE username = %s", GetSQLV
 $Recordset1 = mysql_query($query_Recordset1, $condb) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
+
+$colname_Recordset2 = "-1";
+if (isset($_SESSION['ses_username'])) {
+  $colname_Recordset2 = $_SESSION['ses_username'];
+}
+mysql_select_db($database_condb, $condb);
+$query_Recordset2 = sprintf("SELECT point FROM user_id WHERE username = %s", GetSQLValueString($colname_Recordset2, "text"));
+$Recordset2 = mysql_query($query_Recordset2, $condb) or die(mysql_error());
+$row_Recordset2 = mysql_fetch_assoc($Recordset2);
+$totalRows_Recordset2 = mysql_num_rows($Recordset2);
 
 session_start();
 ?>
@@ -97,4 +111,6 @@ function MM_goToURL() { //v3.0
 </html>
 <?php
 mysql_free_result($Recordset1);
+
+mysql_free_result($Recordset2);
 ?>

@@ -3,5 +3,5 @@
 	<infoitem key="UD_Recordset1" value="name:id;datatype:int,name:username;datatype:string,name:password;datatype:string,name:point;datatype:int,name:name;datatype:blob,name:viewer;datatype:int" />
 	<infoitem key="UD_home" value="name:id;datatype:int,name:username;datatype:string,name:password;datatype:string,name:name;datatype:blob,name:viewer;datatype:int" />
 	<infoitem key="UD_Recordset2" value="name:botask;datatype:blob,name:botans;datatype:blob" />
-	<infoitem key="UD_Recordset3" value="name:mechat;datatype:blob,name:botchat;datatype:blob" />
+	<infoitem key="UD_Recordset3" value="name:bname;datatype:blob,name:mechat;datatype:blob,name:botchat;datatype:blob" />
 </info>

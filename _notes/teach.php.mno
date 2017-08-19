@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
 	<infoitem key="UD_Recordset1" value="name:id;datatype:int,name:username;datatype:string,name:password;datatype:string,name:point;datatype:int,name:name;datatype:blob,name:viewer;datatype:int" />
+	<infoitem key="UD_Recordset2" value="name:point;datatype:int" />
 </info>

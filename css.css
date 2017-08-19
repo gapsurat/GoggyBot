@@ -19,16 +19,16 @@ body {
 	margin:2em 20%;
 }
 .btn {
-    align-self: center;
-    color: #fff !important;
-    border: 3px solid #f5aa00;
-    display: block;
-    margin: auto;
-    width: 30%;
-    background-color: #f5aa00;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    text-align: center;
+  align-self: center;
+  color: #fff !important;
+  border: 3px solid #f5aa00;
+  display: block;
+  margin: auto;
+  width: 80%;
+  background-color: #f5aa00;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  text-align: center;
 	transition:color .3s,background .3s;
 	cursor:pointer;
 	box-shadow: 0 0 7px 1px rgba(0,0,0,0.4);
