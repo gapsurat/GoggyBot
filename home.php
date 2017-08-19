@@ -184,17 +184,18 @@ if (isset($_GET['totalRows_Recordset3'])) {
   $totalRows_Recordset3 = mysql_num_rows($all_Recordset3);
 }
 $totalPages_Recordset3 = ceil($totalRows_Recordset3/$maxRows_Recordset3)-1;
-
 mysql_select_db($database_condb, $condb);
-if($row_Recordset2[botans]== ""){
+if($row_Recordset2[botans] == "" && $_POST[botans] != ""){
 	$row_Recordset2[botans]="ไม่เข้าใจคำถาม";
 	$id = $_SESSION['ses_username'];
-	mysql_query("update user_id set point = point+1 where username = '$id'");
 	mysql_query("INSERT INTO botprogram (botask, botans) VALUES ('$_POST[botans]','$row_Recordset2[botans]')");
-	header("Refresh: $sec; url=$page");
+	mysql_query("update user_id set point = point+1 where username = '$id'");
+	header("Refresh:0");
 }
 $bname = $_SESSION['ses_username'];
+if($_POST[botans]!=""){
 $query = mysql_query("insert into gogchat (bname, mechat, botchat) values ('$bname', '$_POST[botans]', '$row_Recordset2[botans]')");
+}
 $query_Recordset3 = "SELECT * FROM gogchat";
 $Recordset3 = mysql_query($query_Recordset3, $condb) or die(mysql_error());
 $row_Recordset3 = mysql_fetch_assoc($Recordset3);
@@ -255,12 +256,13 @@ function AAAAA() {
           <td width="40%"><?php echo $row_Recordset3['botchat']; ?></td>
         </tr>
       <?php } while ($row_Recordset3 = mysql_fetch_assoc($Recordset3)); ?>
+      
       </table>
     </div>
   </div>
 
   <div class="card" style="margin-top:2em !important;height: 60px;">
-    <form id="botans" name="botans" method="post" action="" style="">
+    <form id="botans" name="botans" method="post" action="home.php" style="">
         <input class="input" name="botans" type="text" id="botans" style="height:50px;float:left;width:70%;" /><br />
         <input type="submit" name="submit" id="submit" class="btn" value="ส่งข้อความ" style="float:right;width:20%;margin:0 !important;" />
     </form>
