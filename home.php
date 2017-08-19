@@ -194,7 +194,7 @@ if($row_Recordset2[botans] == "" && $_POST[botans] != ""){
 }
 $bname = $_SESSION['ses_username'];
 if($_POST[botans]!=""){
-$query = mysql_query("insert into gogchat (bname, mechat, botchat) values ('$row_Recordset1['point']', '$_POST[botans]', '$row_Recordset2[botans]')");
+$query = mysql_query("insert into gogchat (bname, mechat, botchat) values ('$row_Recordset1[name]', '$_POST[botans]', '$row_Recordset2[botans]')");
 }
 $query_Recordset3 = "SELECT * FROM gogchat";
 $Recordset3 = mysql_query($query_Recordset3, $condb) or die(mysql_error());
