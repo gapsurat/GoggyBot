@@ -89,7 +89,7 @@ session_start();
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Unbenanntes Dokument</title>
+<title>ตารางคะแนน</title>
 <link href="./css.css" rel="stylesheet">
 <script type="text/javascript">
 function MM_goToURL() { //v3.0
