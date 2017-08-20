@@ -57,9 +57,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
 		mysql_query("update botprogram set botans = '$botans' where botask = '$botask'");
   mysql_select_db($database_condb, $condb);
 	  $id = $_SESSION['ses_username'];
-	  if($Result1 = mysql_query($insertSQL, $condb) && ($row_Recordset1['point'] >= 5) ){
+	  if($Result1 = mysql_query($insertSQL, $condb) && ($row_Recordset1['point'] >= 1) ){
 	   echo "<script>alert('สอนบอทสำเร็จ');</script>";
-	   mysql_query("update user_id set point = point-5 where username = '$id'");
+	   mysql_query("update user_id set point = point-1 where username = '$id'");
 	   mysql_query("update user_id set viewer = viewer+1 where username = '$id'");
 	   header("Refresh:0");
  }else{
