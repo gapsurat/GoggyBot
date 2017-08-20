@@ -112,7 +112,7 @@ function MM_goToURL() { //v3.0
 <?php include('./nav.php'); ?>
 <div style="padding:150px 0;">
 <form id="form2" name="form2" class="card" method="POST" action="<?php echo $editFormAction; ?>">
-	<h2>สอนบอท ใช้ 1 แต้ม และได้คะแนนการสอน 1 คะแนน</h2>
+	<h2><P Align=center>สอนบอท ใช้ 1 แต้ม และได้คะแนนการสอน 1 คะแนน</p></h2>
 	<p align="center">คำถาม</p>
     <input class="input" name="botask" type="text" id="botask" />
 	<p align="center">คำตอบ</p>
