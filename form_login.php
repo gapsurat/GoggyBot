@@ -41,7 +41,6 @@ $loginFormAction = $_SERVER['PHP_SELF'];
 if (isset($_GET['accesscheck'])) {
   $_SESSION['PrevUrl'] = $_GET['accesscheck'];
 }
-
 if (isset($_POST['username'])) {
   $loginUsername=$_POST['username'];
   $password=$_POST['password'];

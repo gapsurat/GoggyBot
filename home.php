@@ -147,6 +147,7 @@ if (isset($_GET['pageNum_Recordset2'])) {
 $startRow_Recordset2 = $pageNum_Recordset2 * $maxRows_Recordset2;
 
 $colname_Recordset2 = "-1";
+$_POST['botans'] = htmlspecialchars($_POST['botans']);
 if (isset($_POST['botans'])) {
   $colname_Recordset2 = $_POST['botans'];
 }
@@ -251,9 +252,9 @@ function AAAAA() {
       <table width="100%" border="0" align="center" >
       <?php do { ?>
         <tr>
-          <td width="20%"><?php echo $row_Recordset3['bname']; ?></td>
-          <td width="40%"><?php echo $row_Recordset3['mechat']; ?></td>
-          <td width="40%"><?php echo $row_Recordset3['botchat']; ?></td>
+          <td width="20%"><?php echo htmlspecialchars($row_Recordset3['bname']); ?></td>
+          <td width="40%"><?php echo htmlspecialchars($row_Recordset3['mechat']); ?></td>
+          <td width="40%"><?php echo htmlspecialchars($row_Recordset3['botchat']); ?></td>
         </tr>
       <?php } while ($row_Recordset3 = mysql_fetch_assoc($Recordset3)); ?>
       

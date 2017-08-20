@@ -38,8 +38,11 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-	
+	$_POST['username'] = htmlspecialchars($_POST['username']);
+	$_POST['password'] = htmlspecialchars($_POST['password']);
+	$_POST['name'] = htmlspecialchars($_POST['name']);
   $insertSQL = sprintf("INSERT INTO user_id (username, password, name) VALUES (%s, %s, %s)",
+  
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"),
                        GetSQLValueString($_POST['name'], "text"));

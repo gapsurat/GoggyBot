@@ -3,6 +3,11 @@
 <?php require_once('Connections/condb.php');
 session_start() ?>
 <?php
+function escape($post){
+	$post = str_replace("<","",$post);
+	$post = str_replace(">","",$post);
+	return $post;
+}
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -49,6 +54,8 @@ $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
+	$_POST['botask'] = htmlspecialchars($_POST['botask']);
+	$_POST['botans'] = htmlspecialchars($_POST['botans']);
  	 $insertSQL = sprintf("INSERT INTO botprogram (botask, botans) VALUES (%s, %s)",
                        GetSQLValueString($_POST['botask'], "text"),
                        GetSQLValueString($_POST['botans'], "text"));
